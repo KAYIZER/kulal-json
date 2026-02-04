@@ -2,16 +2,21 @@
 FROM runpod/worker-comfyui:5.5.1-base
 
 # install custom nodes into comfyui (first node with --mode remote to fetch updated cache)
-# The following custom nodes are listed under unknown_registry and could not be resolved because no aux_id (GitHub repo) was provided:
-# - CheckpointLoaderSimple (no aux_id found) -> skipped
-# - TextEncodeQwenImageEditPlus (no aux_id found) -> skipped
-# - TextEncodeQwenImageEditPlus (no aux_id found) -> skipped
-# - ConditioningZeroOut (no aux_id found) -> skipped
+# The workflow included custom nodes under `unknown_registry` but no aux_id (GitHub repo) was provided for any of them,
+# so they cannot be installed automatically and were skipped:
+# - CheckpointLoaderSimple (unknown_registry) - no aux_id provided, skipped
+# - TextEncodeQwenImageEditPlus (unknown_registry) - no aux_id provided, skipped
+# - TextEncodeQwenImageEditPlus (unknown_registry) - duplicate, no aux_id provided, skipped
+# - ConditioningZeroOut (unknown_registry) - no aux_id provided, skipped
+# - ResizeImagesByLongerEdge (unknown_registry) - no aux_id provided, skipped
+WORKDIR /workspace/ComfyUI
 
 RUN git clone https://github.com/lrzjason/Comfyui-QwenEditUtils.git custom_nodes/Comfyui-QwenEditUtils
 
 # install requirements for custom nodes
 RUN pip install -r custom_nodes/Comfyui-QwenEditUtils/requirements.txt
+
+
 
 
 # download models into comfyui
