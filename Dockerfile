@@ -9,7 +9,7 @@ FROM runpod/worker-comfyui:5.5.1-base
 # - TextEncodeQwenImageEditPlus (unknown_registry) - duplicate, no aux_id provided, skipped
 # - ConditioningZeroOut (unknown_registry) - no aux_id provided, skipped
 # - ResizeImagesByLongerEdge (unknown_registry) - no aux_id provided, skipped
-WORKDIR /workspace/ComfyUI
+WORKDIR /comfyui
 
 RUN git clone https://github.com/lrzjason/Comfyui-QwenEditUtils.git custom_nodes/Comfyui-QwenEditUtils
 
