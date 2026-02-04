@@ -9,15 +9,8 @@ FROM runpod/worker-comfyui:5.5.1-base
 # - TextEncodeQwenImageEditPlus (unknown_registry) - duplicate, no aux_id provided, skipped
 # - ConditioningZeroOut (unknown_registry) - no aux_id provided, skipped
 # - ResizeImagesByLongerEdge (unknown_registry) - no aux_id provided, skipped
-WORKDIR /comfyui
-
-RUN git clone https://github.com/lrzjason/Comfyui-QwenEditUtils.git custom_nodes/Comfyui-QwenEditUtils
-
-# install requirements for custom nodes
-RUN pip install -r custom_nodes/Comfyui-QwenEditUtils/requirements.txt
-
-
-
+# Install custom nodes using RunPod's CLI
+RUN comfy-node-install qweneditutils
 
 # download models into comfyui
 RUN comfy model download --url https://huggingface.co/Phr00t/Qwen-Image-Edit-Rapid-AIO/resolve/main/v21/Qwen-Rapid-AIO-NSFW-v21.safetensors --relative-path models/checkpoints --filename Qwen-Rapid-AIO-NSFW-v21.safetensors
